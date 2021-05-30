@@ -1,0 +1,50 @@
+#include <iostream>
+void input(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+    std::cin >> x1;
+    std::cin >> y1;
+    std::cin >> x2;
+    std::cin >> y2;
+    std::cin >> x3;
+    std::cin >> y3;
+    std::cin >> x4;
+    std::cin >> y4;
+}
+   float area(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+    return (abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+}
+ class point {
+ public :int x;
+ public: int y;
+};
+class triangle {
+public: void inRegion(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+    {
+        float A = area(x1, y1, x2, y2, x3, y3);
+        float A1 = area(x1, y1, x2, y2, x4, y4);
+        float A2 = area(x1, y1, x4, y4, x3, y3);
+        float A3 = area(x4, y4, x2, y2, x3, y3);
+
+        if (A == (A1 + A2 + A3)) {
+            std::cout << "point is in Region";
+        }
+        else {
+            std::cout << "Not in Region";
+        }
+
+    
+    }
+
+};
+
+int main()
+{
+ point a;
+ point b;
+ point org;
+ point p;
+ triangle t1;
+    input(a.x, a.y, b.x, b.y, org.x, org.y, p.x, p.y);
+    t1.inRegion(a.x, a.y, b.x,b.y ,org.x,org.y ,p.x,p.y);
+
+}
