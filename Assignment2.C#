@@ -1,0 +1,111 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace assignment2
+{
+    class point
+    {
+        // declair point
+        public double x;
+        public double y;
+    }
+    class program
+
+    {
+        static void checkInRegion(point a,point b,point org,point p)
+        {
+            // To check That the point belong to given region  
+            double A = program.area(a, b, org);
+            double A1 = program.area(a, b, p);
+            double A2 = program.area(a, p, org);
+            double A3 = program.area(p, b, org);
+            if (A == (A1 + A2 + A3))
+            {
+                Console.WriteLine("Point is in Region");
+            }
+            else
+            {
+                Console.WriteLine("Not in Region");
+            }
+        }
+         static point rotation(point c, double theta)
+        {
+            //after rotation of System
+            c.x = c.x * Math.Cos(theta) - c.y * Math.Sin(theta);
+            c.y = c.x * Math.Sin(theta) + c.y * Math.Cos(theta);
+            return c;
+        }
+        static point translate(point s,point tr)
+        {
+            //after translation of system
+            s.x = s.x + tr.x;
+            s.y = s.y + tr.y;
+            return s;
+        }
+        static double area(point p ,point q,point r)
+        {
+            //To find area of region
+            return Math.Abs(p.x * (q.y - r.y) + q.x * (r.y - p.y) + r.x * (p.y - q.y));
+        }
+        static void Main(string[] args)
+        {
+            
+            point a = new point();
+            point b = new point();
+            point org = new point();
+            point p = new point();
+            point tr = new point();
+            double theta;
+            a.x = int.Parse(Console.ReadLine());
+            a.y = int.Parse(Console.ReadLine());
+            b.x = int.Parse(Console.ReadLine());
+            b.y = int.Parse(Console.ReadLine());
+            org.x = int.Parse(Console.ReadLine());
+            org.y = int.Parse(Console.ReadLine());
+            p.x = int.Parse(Console.ReadLine());
+            p.y = int.Parse(Console.ReadLine());
+            tr.x = int.Parse(Console.ReadLine());
+            tr.y = int.Parse(Console.ReadLine());
+            theta = int.Parse(Console.ReadLine());
+            //initial 
+            program.checkInRegion(a, b, org, p);
+
+            point temp1 = new point();
+            point temp2 = new point();
+            point temp3 = new point();
+            temp1.x = a.x;
+            temp1.y = a.y;
+            temp2.x = b.x;
+            temp2.y = b.y;
+            temp3.x = org.x;
+            temp3.y = org.y;
+            
+
+            a = program.translate(a,tr);
+            b = program.translate(b, tr);
+            org = program.translate(org, tr);
+
+             
+            //after translation
+            program.checkInRegion(a, b, org, p);
+
+            a = program.rotation(temp1, theta);
+            b = program.rotation(temp2, theta);
+
+           // Console.WriteLine("co-or of a:{0} {1}",a.x,a.y);
+            //Console.WriteLine("co - or of b:{0} {1}" ,b.x,b.y);
+
+            // after rotation about origin
+            program.checkInRegion(a, b , temp3, p);
+
+
+            // Console.WriteLine(A);
+            Console.ReadLine();
+
+
+        }
+    }
+}
